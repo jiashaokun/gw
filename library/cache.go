@@ -14,16 +14,16 @@ var rds *redis.Client
 func init() {
 	addr := fmt.Sprintf("%s:%s", conf.Cache["host"], conf.Cache["port"])
 	rds = redis.NewClient(&redis.Options{
-		Addr:               addr,
-		Password:           "",
-		DB:                 0,
-		PoolSize:           conf.CachePoll,
-		MinIdleConns:       conf.CacheMinIdleConns,
+		Addr:         addr,
+		Password:     "",
+		DB:           0,
+		PoolSize:     conf.CachePoll,
+		MinIdleConns: conf.CacheMinIdleConns,
 	})
 }
 
 //set
-func Set(key,val string, tm int) error {
+func Set(key, val string, tm int) error {
 	timeOut := time.Duration(tm) * time.Second
 	if err := rds.Set(key, val, timeOut).Err(); err != nil {
 		return err

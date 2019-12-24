@@ -3,7 +3,7 @@ package admin
 type Add struct {
 	Id         string `json:"id"`
 	Name       string `json:"name" form:"name" binding:"required"`
-	Path       string 	`json:"path" form:"path" binding:"required"`
+	Path       string `json:"path" form:"path" binding:"required"`
 	To         string `json:"to" form:"to" binding:"required"`
 	Dns        int    `json:"dns" form:"dns" binding:"oneof=0 1"`
 	CacheTime  int    `json:"cache_time" form:"cache_time" binding:"required"`

@@ -6,4 +6,3 @@ var Code = map[int]string{
 	500: "操作失败",
 	504: "参数验证失败",
 }
-

@@ -43,7 +43,7 @@ func TestFindOne(t *testing.T) {
 }
 
 func TestDel(t *testing.T) {
-	del := bson.M{"id":id}
+	del := bson.M{"id": id}
 	if err := Del("wg", del); err != nil {
 		t.Fatal("MongoDB Del Was Err")
 	}
