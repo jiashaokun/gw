@@ -13,16 +13,16 @@ type Resp struct {
 	Data interface{} `json:"data"`
 }
 
-func Response(c *gin.Context, code int, v interface{}, msg string) {
+func Response(c *gin.Context, code int, v interface{}) {
+	d := [...]int{}
 	out := Resp{
 		Code: code,
 		Msg:  conf.Code[code],
+		Data: d,
 	}
 
-	if msg != "" {
-		out.Msg = msg
+	if v != nil {
+		out.Data = v
 	}
-
-	out.Data = v
 	c.JSON(code, out)
 }

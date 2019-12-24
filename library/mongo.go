@@ -1,9 +1,9 @@
 package library
 
 import (
+	"context"
 	"fmt"
 	"time"
-	"context"
 
 	"gw/conf"
 
@@ -33,7 +33,7 @@ func init() {
 
 //写入tb记录
 func Add(tb string, m interface{}) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if _, err := cli.Collection(tb).InsertOne(ctx, m); err != nil {
@@ -45,11 +45,23 @@ func Add(tb string, m interface{}) error {
 
 //查询一条数据
 func FindOne(tb string, w bson.M, m interface{}) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 5 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := cli.Collection(tb).FindOne(ctx, w).Decode(m); err != nil {
 		return err
 	}
+	return nil
+}
+
+//删除
+func Del(tb string, w bson.M) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	if _, err := cli.Collection(tb).DeleteOne(ctx, w); err != nil {
+		return err
+	}
+
 	return nil
 }
