@@ -9,6 +9,7 @@ id|string|uuid (唯一标识)| f2509627-08e5-4575-818c-f8b27b26c631
 name|string|接口名称|获取用户信息
 path|string|访问网关路径|/user/info
 to|string|请求专项的地址/IP列表，英文逗号分隔 | http://0.0.0.1:1,http://0.0.0.1:2 或 http://a1.com,http://a2.com
+method|string|请求方式 GET/POST | 目前只支持 GET/POST 
 dns|int32|是否需要dns | 0：不需要；1：需要 (若需要，则轮训访问字段 to 中的 IP 或 域名)
 cacheTime|int32|配置缓存时间|单位：秒
 timeout|int32|请求超时时间|单位：秒

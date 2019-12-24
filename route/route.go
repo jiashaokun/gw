@@ -1,6 +1,7 @@
 package route
 
 import (
+	"gw/route/api"
 	"gw/route/admin"
 
 	"github.com/gin-gonic/gin"
@@ -10,7 +11,7 @@ import (
 func Route() *gin.Engine {
 	r := gin.Default()
 	//外部调用路由
-	//api.Route(r)
+	api.Route(r)
 
 	//后台接口调用路由
 	admin.Route(r)
