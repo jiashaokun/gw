@@ -23,7 +23,7 @@ func init() {
 }
 
 //set
-func Set(key, val string, tm int) error {
+func SetCache(key, val string, tm int) error {
 	timeOut := time.Duration(tm) * time.Second
 	if err := rds.Set(key, val, timeOut).Err(); err != nil {
 		return err
@@ -33,11 +33,16 @@ func Set(key, val string, tm int) error {
 }
 
 //get
-func Get(key string) (string, error) {
+func GetCache(key string) string {
 	val, err := rds.Get(key).Result()
 	if err != nil || err == redis.Nil {
-		return "", nil
+		return ""
 	}
 
-	return val, nil
+	return val
+}
+
+//Incr
+func Incr(key string) {
+	rds.Incr(key)
 }

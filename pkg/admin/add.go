@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"gw/backend/admin"
+	"gw/backend"
 	"gw/library"
 	"gw/response"
 	"gw/util"
@@ -13,7 +13,7 @@ import (
 
 // 新增接口，增加配置接口
 func Add(c *gin.Context) {
-	var res, info admin.Add
+	var res, info backend.MongoInfo
 
 	info.CreateTime = util.GetTime()
 	info.UpdateTime = util.GetTime()

@@ -21,9 +21,7 @@ func init() {
 	opts := &options.ClientOptions{}
 	opts.SetMaxPoolSize(conf.MongoPoll)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
+	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
 	con, err := mongo.Connect(ctx, options.Client().ApplyURI(host), opts)
 	if err != nil {
 		panic("mongodb connect error")

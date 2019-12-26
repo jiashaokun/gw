@@ -10,7 +10,6 @@ import (
 )
 
 func Route(r *gin.Engine) {
-
 	list, err := library.FindAll("wg")
 	if err != nil {
 		panic(fmt.Sprintf("Api Route Was Wrong Err Was %s", err))
@@ -21,6 +20,4 @@ func Route(r *gin.Engine) {
 		pth := v.Path
 		r.Any(pth, api.Run)
 	}
-
-	//r.Any("/api/*action", api.Run)
 }
