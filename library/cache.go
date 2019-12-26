@@ -24,6 +24,10 @@ func init() {
 
 //set
 func SetCache(key, val string, tm int) error {
+	if tm == 0 {
+		return nil
+	}
+
 	timeOut := time.Duration(tm) * time.Second
 	if err := rds.Set(key, val, timeOut).Err(); err != nil {
 		return err

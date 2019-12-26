@@ -2,23 +2,35 @@ package library
 
 import (
 	"errors"
+	"fmt"
+	"gw/util"
 	"strings"
 	"time"
 
 	"gw/conf"
 
+	"github.com/gin-gonic/gin"
 	"github.com/valyala/fasthttp"
 )
 
 type HttpRequest struct {
-	Method string
-	To     string
-	Out    int
+	Method    string
+	To        string
+	Out       int
+	CacheTime int
 }
 
 func (h *HttpRequest) Http() (string, error) {
 	var body string
 	var err error
+
+	//get cache
+	key := util.CacheKey(h.To)
+	body = GetCache(key)
+	if body != "" {
+		return body, nil
+	}
+
 	method := strings.ToUpper(h.Method)
 
 	switch method {
@@ -31,6 +43,8 @@ func (h *HttpRequest) Http() (string, error) {
 	default:
 		body, err = "", errors.New("Http Request Any Method")
 	}
+
+	SetCache(key, body, h.CacheTime)
 
 	return body, err
 }
@@ -89,4 +103,27 @@ func post(u string, out int) (string, error) {
 	bodyStr := string(body)
 
 	return bodyStr, nil
+}
+
+func (h *HttpRequest) ParserUrl(c *gin.Context) {
+	query, method := "", c.Request.Method
+	switch method {
+	case "GET":
+		query = c.Request.URL.RawQuery
+		break
+	case "POST":
+		c.Request.ParseForm()
+		param := c.Request.PostForm
+		if len(param) > 0 {
+			query = param.Encode()
+		}
+		break
+	default:
+		//todo add other
+		break
+	}
+
+	if query != "" {
+		h.To = fmt.Sprintf("%s?%s", h.To, query)
+	}
 }

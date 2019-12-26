@@ -38,10 +38,15 @@ func Run(c *gin.Context) {
 
 		//发起请求
 		hp := library.HttpRequest{
-			Method: glb.Md.Method,
-			To:     glb.To,
-			Out:    glb.Md.Timeout,
+			Method:    glb.Md.Method,
+			To:        glb.To,
+			Out:       glb.Md.Timeout,
+			CacheTime: glb.Md.CacheTime,
 		}
+		//设置正确的url
+		hp.ParserUrl(c)
+
+		//发起请求
 		body, err := hp.Http()
 		if err != nil {
 			glb.Ech <- err
