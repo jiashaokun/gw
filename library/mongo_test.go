@@ -1,7 +1,6 @@
 package library
 
 import (
-	"fmt"
 	"testing"
 
 	"gw/backend"
@@ -18,7 +17,7 @@ func TestAdd(t *testing.T) {
 		Id:         id,
 		Name:       "Test_one",
 		Path:       "/add/test",
-		To:         "http://baidu.com/1/test,http://baidu.com/2/test,http://baidu.com/3/test",
+		To:         "http://guazi.com,http://guazi2.com,http://guazi3.com",
 		Method:     "GET",
 		Dns:        1,
 		CacheTime:  200,
@@ -39,8 +38,6 @@ func TestFindOne(t *testing.T) {
 		t.Fatalf("MongoDB Test FindOne Was Wrong Err Was %s", err)
 	}
 
-	fmt.Println(b)
-
 	if b.Name != "Test_one" {
 		t.Fatalf("Mongo FindOne Was Wrong Name Want Test_one now %s", b.Name)
 	}
@@ -52,7 +49,6 @@ func TestFindAll(t *testing.T) {
 		t.Fatalf("MongoDB Test FindAll Was Wrong Err Was %s", err)
 	}
 
-	fmt.Println(cux[0])
 	if cux[0].Id != "4ab01a89-4509-40cb-8afb-34ab8552ae88" {
 		t.Fatalf("Mongo FindAll Was Wrong Id Want 4ab01a89-4509-40cb-8afb-34ab8552ae88 %s", cux[0].Id)
 	}
