@@ -7,5 +7,6 @@ import (
 )
 
 func Route(r *gin.Engine) {
-	r.POST("/req/add", admin.Add)
+	r.POST("/req/add/api", admin.Add)
+	r.POST("/req/add/group", admin.AddGroup)
 }

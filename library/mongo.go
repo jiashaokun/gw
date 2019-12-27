@@ -80,6 +80,33 @@ func FindAll(tb string) ([]backend.MongoInfo, error) {
 	return info, nil
 }
 
+//查询全部路由组 group 数据
+func Group(tb string) ([]backend.MongoGroup, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	cur, err := cli.Collection(tb).Find(ctx, bson.M{})
+	if err != nil {
+		return nil, err
+	}
+	defer cur.Close(ctx)
+
+	if err := cur.Err(); err != nil {
+		return nil, err
+	}
+
+	var info []backend.MongoGroup
+	for cur.Next(ctx) {
+		var dec *backend.MongoGroup
+		if err := cur.Decode(&dec); err != nil {
+			return nil, err
+		}
+		info = append(info, *dec)
+	}
+
+	return info, nil
+}
+
 //删除
 func Del(tb string, w bson.M) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

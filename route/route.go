@@ -1,8 +1,8 @@
 package route
 
 import (
-	"gw/route/api"
 	"gw/route/admin"
+	"gw/route/api"
 
 	"github.com/gin-gonic/gin"
 )

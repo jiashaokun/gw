@@ -24,10 +24,12 @@ type G struct {
 	Ech chan error
 	//MongoData
 	Md backend.MongoInfo
-	//request path
+	//com request path
 	Pth string
-	//request url
+	//request url path
 	To string
+	//Query all url
+	Query string
 }
 
 func (g *G) SetInfo(c *gin.Context) error {

@@ -32,19 +32,20 @@ func Run(c *gin.Context) {
 		dns := ds.Dns{
 			Ds:  glb.Md.Dns,
 			Pth: glb.Md.To,
+			Ctx: c,
 		}
 		dns.GetRestUrl()
 		glb.To = dns.To
+		glb.Query = dns.Query
 
 		//发起请求
 		hp := library.HttpRequest{
 			Method:    glb.Md.Method,
 			To:        glb.To,
+			Query:     glb.Query,
 			Out:       glb.Md.Timeout,
 			CacheTime: glb.Md.CacheTime,
 		}
-		//设置正确的url
-		hp.ParserUrl(c)
 
 		//发起请求
 		body, err := hp.Http()
@@ -53,7 +54,6 @@ func Run(c *gin.Context) {
 			return
 		}
 		glb.Rch <- body
-		//容错 todo
 	}(c, &glb)
 
 	select {

@@ -24,5 +24,5 @@ func Response(c *gin.Context, code int, v interface{}) {
 	if v != nil {
 		out.Data = v
 	}
-	c.JSON(code, out)
+	c.JSON(200, out)
 }

@@ -7,12 +7,16 @@ import (
 
 	"gw/library"
 	"gw/util"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Dns struct {
-	Ds  int
-	Pth string
-	To  string
+	Ds    int
+	Pth   string
+	To    string
+	Query string
+	Ctx   *gin.Context
 }
 
 func (d *Dns) GetRestUrl() {
@@ -33,6 +37,9 @@ func (d *Dns) GetRestUrl() {
 	uk := num % len(l)
 
 	d.To = getUrl(d.Pth, uk)
+
+	d.Query = getRequestUrl(d.To, d.Ctx)
+
 	//cache ++
 	library.Incr(key)
 }
@@ -50,4 +57,30 @@ func getUrl(u string, k int) string {
 	ls := getList(u)
 
 	return ls[k]
+}
+
+//获取最终请求的请求串儿
+func getRequestUrl(to string, c *gin.Context) string {
+	query, method := "", c.Request.Method
+	switch method {
+	case "GET":
+		query = c.Request.URL.RawQuery
+		break
+	case "POST":
+		c.Request.ParseForm()
+		param := c.Request.PostForm
+		if len(param) > 0 {
+			query = param.Encode()
+		}
+		break
+	default:
+		//todo any other
+		break
+	}
+
+	queryStr := to
+	if query != "" {
+		queryStr = fmt.Sprintf("%s?%s", to, query)
+	}
+	return queryStr
 }
