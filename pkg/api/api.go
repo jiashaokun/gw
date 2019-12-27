@@ -2,6 +2,7 @@ package api
 
 import (
 	"fmt"
+	flow2 "gw/pkg/flow"
 	"net/http"
 	"time"
 
@@ -37,6 +38,16 @@ func Run(c *gin.Context) {
 		dns.GetRestUrl()
 		glb.To = dns.To
 		glb.Query = dns.Query
+		
+		//流量检查
+		flow := flow2.Flow{
+			Path: glb.To,
+			Num:  glb.Md.Flow,
+		}
+		if err := flow.Check(); err != nil {
+			glb.Ech <- err
+			return
+		}
 
 		//发起请求
 		hp := library.HttpRequest{
