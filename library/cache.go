@@ -50,3 +50,18 @@ func GetCache(key string) string {
 func Incr(key string) {
 	rds.Incr(key)
 }
+
+//HSet
+func HSet(key string, f string, v interface{}) {
+	rds.HSet(key, f, v)
+}
+
+//HGetNx
+func HGet(key, f string) string {
+	c := rds.HGet(key, f)
+	res, err := c.Result()
+	if err != nil {
+		return ""
+	}
+	return res
+}

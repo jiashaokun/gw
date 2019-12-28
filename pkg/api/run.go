@@ -2,7 +2,6 @@ package api
 
 import (
 	"encoding/json"
-	"net/url"
 
 	"gw/backend"
 	"gw/conf"
@@ -25,7 +24,7 @@ type G struct {
 	//MongoData
 	Md backend.MongoInfo
 	//com request path
-	Pth string
+	Path string
 	//request url path
 	To string
 	//Query all url
@@ -33,12 +32,10 @@ type G struct {
 }
 
 func (g *G) SetInfo(c *gin.Context) error {
-	c.Request.ParseForm()
-	u, _ := url.Parse(c.Request.RequestURI)
-	g.Pth = u.Path
+	g.Path = util.GetRequestUri(c)
 
 	//get cache
-	key := util.CacheKey(g.Pth)
+	key := util.CacheKey(g.Path)
 	minfo := new(backend.MongoInfo)
 
 	if str := library.GetCache(key); str != "" {
@@ -47,7 +44,7 @@ func (g *G) SetInfo(c *gin.Context) error {
 		return nil
 	}
 
-	if err := library.FindOne("wg", bson.M{"path": g.Pth}, minfo); err != nil {
+	if err := library.FindOne("wg", bson.M{"path": g.Path}, minfo); err != nil {
 		return err
 	}
 	g.Md = *minfo

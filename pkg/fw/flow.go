@@ -1,12 +1,12 @@
-package flow
+package fw
 
 import (
 	"errors"
 	"fmt"
-	"gw/library"
 	"strconv"
 
 	"gw/util"
+	"gw/library"
 )
 
 type Flow struct {

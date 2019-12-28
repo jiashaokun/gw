@@ -3,8 +3,9 @@ package api
 import (
 	"fmt"
 
-	"gw/library"
 	"gw/pkg/api"
+	"gw/library"
+	"gw/pkg/middle"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +19,6 @@ func Route(r *gin.Engine) {
 	//动态加载路由,根据mongoDB中的path加载
 	for _, v := range list {
 		pth := v.Group
-		r.Any(fmt.Sprintf("%s%s", pth, "*action"), api.Run)
+		r.Any(fmt.Sprintf("%s%s", pth, "*action"), api.Run, middle.Body())
 	}
 }

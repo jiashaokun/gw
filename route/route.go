@@ -15,5 +15,6 @@ func Route() *gin.Engine {
 
 	//后台接口调用路由
 	admin.Route(r)
+
 	return r
 }

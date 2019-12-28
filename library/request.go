@@ -2,6 +2,7 @@ package library
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 	"time"
 
@@ -24,7 +25,7 @@ func (h *HttpRequest) Http() (string, error) {
 	var err error
 
 	//get cache
-	key := util.CacheKey(h.Query)
+	key := util.CacheKey(fmt.Sprintf("cache_key_%s", h.Query))
 	body = GetCache(key)
 	if body != "" {
 		return body, nil

@@ -1,4 +1,4 @@
-package dns
+package ds
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ func (d *Dns) GetRestUrl() {
 	}
 
 	//需要dns
-	key := util.CacheKey(fmt.Sprintf("%s_getresurl", d.Pth))
+	key := util.CacheKey(fmt.Sprintf("%s_request_dns_num", d.Pth))
 	//获取当前访问次数
 	incr := library.GetCache(key)
 	num, _ := strconv.Atoi(incr)
@@ -38,7 +38,7 @@ func (d *Dns) GetRestUrl() {
 
 	d.To = getUrl(d.Pth, uk)
 
-	d.Query = getRequestUrl(d.To, d.Ctx)
+	d.Query = util.GetRequestUrl(d.To, d.Ctx)
 
 	//cache ++
 	library.Incr(key)
@@ -57,30 +57,4 @@ func getUrl(u string, k int) string {
 	ls := getList(u)
 
 	return ls[k]
-}
-
-//获取最终请求的请求串儿
-func getRequestUrl(to string, c *gin.Context) string {
-	query, method := "", c.Request.Method
-	switch method {
-	case "GET":
-		query = c.Request.URL.RawQuery
-		break
-	case "POST":
-		c.Request.ParseForm()
-		param := c.Request.PostForm
-		if len(param) > 0 {
-			query = param.Encode()
-		}
-		break
-	default:
-		//todo any other
-		break
-	}
-
-	queryStr := to
-	if query != "" {
-		queryStr = fmt.Sprintf("%s?%s", to, query)
-	}
-	return queryStr
 }

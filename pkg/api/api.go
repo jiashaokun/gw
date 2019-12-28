@@ -2,12 +2,13 @@ package api
 
 import (
 	"fmt"
-	flow2 "gw/pkg/flow"
 	"net/http"
 	"time"
 
 	"gw/library"
-	ds "gw/pkg/dns"
+	"gw/pkg/ds"
+	"gw/pkg/dy"
+	"gw/pkg/fw"
 	"gw/util"
 
 	"github.com/gin-gonic/gin"
@@ -29,6 +30,18 @@ func Run(c *gin.Context) {
 			return
 		}
 
+		//容错
+		decay := dy.Decay{
+			Open:      glb.Md.Decay,
+			DecayTime: glb.Md.DecayTime,
+			Ctx:       c,
+		}
+		decayBody := decay.Start()
+		if decayBody != "" {
+			glb.Rch <- decayBody
+			return
+		}
+
 		//获取要访问的url
 		dns := ds.Dns{
 			Ds:  glb.Md.Dns,
@@ -38,9 +51,9 @@ func Run(c *gin.Context) {
 		dns.GetRestUrl()
 		glb.To = dns.To
 		glb.Query = dns.Query
-		
+
 		//流量检查
-		flow := flow2.Flow{
+		flow := fw.Flow{
 			Path: glb.To,
 			Num:  glb.Md.Flow,
 		}
@@ -64,6 +77,10 @@ func Run(c *gin.Context) {
 			glb.Ech <- err
 			return
 		}
+
+		//写入上下文,目前用于容错
+		c.Set("RequestBody", body)
+
 		glb.Rch <- body
 	}(c, &glb)
 
