@@ -93,8 +93,5 @@ func Run(c *gin.Context) {
 		c.String(http.StatusInternalServerError, fmt.Sprintln(ech))
 	case <-t.C:
 		c.String(http.StatusNotFound, "request time out")
-	default:
-		t.Stop()
-		c.String(http.StatusNotFound, "request was bad")
 	}
 }

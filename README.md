@@ -17,7 +17,7 @@ GW（网关）包含请求转发，请求超时设置，请求限制，该项目
 - 数据缓存 
 - 容错 （请求递减）
 
-# 如何使用
+#如何使用
 >* DOC.md 中提供了目前写入数据的接口文档
 >* TABLE.md 中提供了MongoDB表设计文档
 
@@ -31,9 +31,12 @@ GW（网关）包含请求转发，请求超时设置，请求限制，该项目
 4. 开始访问，比如在 group 中添加的是 /user/ 在 wg 中添加的是 /user/info 那么访问的地址就是 http://127.0.0.1:1323/user/info?id=1...
 
 
-#压力测试
-### 开启缓存模式下的压力测试
+### 请求网关地址
+<img src="https://github.com/jiashaokun/doc/blob/master/txt/gw1.jpg?raw=true"></img>
 
+---
+### 转发路径
+<img src="https://github.com/jiashaokun/doc/blob/master/txt/gw2.jpg?raw=true"></img>
 
-### 关闭缓存模式下的压力测试
-
+###感谢支持
+<img src="https://github.com/jiashaokun/doc/blob/master/txt/pay.jpg?raw=true" width="300" heigth="300">
