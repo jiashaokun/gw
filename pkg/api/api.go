@@ -2,8 +2,8 @@ package api
 
 import (
 	"fmt"
-	"time"
 	"net/http"
+	"time"
 
 	"gw/conf"
 	"gw/library"
@@ -91,7 +91,7 @@ func Run(c *gin.Context) {
 		c.String(http.StatusOK, rch)
 	case ech := <-glb.Ech:
 		c.String(http.StatusInternalServerError, fmt.Sprintln(ech))
-	case <- t.C:
+	case <-t.C:
 		c.String(http.StatusNotFound, "request time out")
 	default:
 		t.Stop()
