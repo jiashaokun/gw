@@ -1,5 +1,8 @@
 package conf
 
+//app 主动断开时间
+const RequestTimeOut = 30
+
 const MongoPoll = 50
 
 //Cache 缓存 mongoDB 整体数据缓存时间

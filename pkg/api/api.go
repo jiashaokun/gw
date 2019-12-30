@@ -2,9 +2,10 @@ package api
 
 import (
 	"fmt"
-	"net/http"
 	"time"
+	"net/http"
 
+	"gw/conf"
 	"gw/library"
 	"gw/pkg/ds"
 	"gw/pkg/dy"
@@ -16,6 +17,7 @@ import (
 
 // 入口函数
 func Run(c *gin.Context) {
+	t := time.NewTimer(conf.RequestTimeOut * time.Second)
 	//设置 global
 	var glb G
 	glb.Rch = make(chan string)
@@ -89,7 +91,10 @@ func Run(c *gin.Context) {
 		c.String(http.StatusOK, rch)
 	case ech := <-glb.Ech:
 		c.String(http.StatusInternalServerError, fmt.Sprintln(ech))
-	case <-time.After(10 * time.Second):
+	case <- t.C:
 		c.String(http.StatusNotFound, "request time out")
+	default:
+		t.Stop()
+		c.String(http.StatusNotFound, "request was bad")
 	}
 }
