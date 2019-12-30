@@ -39,5 +39,5 @@ GW（网关）包含请求转发，请求超时设置，请求限制，该项目
 <img src="https://github.com/jiashaokun/doc/blob/master/txt/gw2.jpg?raw=true"></img>
 
 ---
-###感谢支持
+
 <img src="https://github.com/jiashaokun/doc/blob/master/txt/pay.jpg?raw=true" width="300" heigth="300">
