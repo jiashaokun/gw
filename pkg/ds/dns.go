@@ -23,6 +23,7 @@ func (d *Dns) GetRestUrl() {
 	//不需要dns
 	if d.Ds != 1 {
 		d.To = getUrl(d.Pth, 0)
+		d.Query = util.GetRequestUrl(d.To, d.Ctx)
 		return
 	}
 
