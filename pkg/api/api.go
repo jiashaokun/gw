@@ -94,4 +94,6 @@ func Run(c *gin.Context) {
 	case <-t.C:
 		c.String(http.StatusNotFound, "request time out")
 	}
+
+	t.Stop()
 }
