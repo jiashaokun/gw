@@ -1,7 +1,7 @@
 # Mongo 表结构设计
 
 ### group 分组表
----
+
 >* 路由分组，wg 中的path需要在该分组内，使用分组是为了避免添加接口反复重启项目的问题
 >* 分钟中的path是模糊搜索的，所以不要重复比如 /user/* 和 /user/info/ 只需要 /user/ 即可
 >* 只有分组中的请求能被访问到
@@ -32,3 +32,5 @@ decay|int|请求衰减（容错）|0：不开启,1：开启 若开启超时或50
 decay_time|int|请求衰减间隔时间|单位：秒，decay=1时生效
 create_time|string|创建时间|Y-m-d H:i:s
 update_time|string|更新时间|Y-m-d H:i:s
+
+### token
