@@ -31,16 +31,15 @@ GW（网关）包含请求转发，请求超时设置，请求限制，该项目
 4. 开始访问，比如在 group 中添加的是 /user/ 在 wg 中添加的是 /user/info 那么访问的地址就是 http://127.0.0.1:1323/user/info?id=1...
 
 <h3 id='jq'>鉴权说明</h3>
->* 请求参数: cb=1&ca=2&ba=3&a=4&_JiaSrc=1
->* 加密参数： _JiaSrc=123&a=4&ba=3&ca=2&cb=1232020-01-01key
->* MD5后：03479689f0782dd83a03d9d4177af085
->* 最终请求参数:cb=1&ca=2&ba=3&a=4&_JiaSrc=1&_JiaSign=03479689f0782dd83a03d9d4177af085
->* 鉴权参数：_JiaSrc 和 _JiaSign 只参与签名，不会参与最终后端接口的请求
+>* 签名包含在Header中
+>* 请求参数示例：bc=1&ca=2&ba=3&ac=4
+>* Content-Src: 1 (来源)
+>* Content-Md5: 03479689f0782dd83a03d9d4177af085 (签名值)
+>* 签名表结构请查看 TABLE.md 中的鉴权表说明
+>* 签名加密方式：MD5 32位小写
+>* 请求有效期：当天
 
-+ 签名加密方式：MD5 32位小写
-+ 签名需要增加传递参数：_JiaSrc（参与签名） 和 _JiaSign（签名后的md5），这两个参数不会参与到后端接口的请求中
-+ 请求有效期：当天 ，具体请查看 TABLE.md 中的鉴权表说明。
-+ 签名方式：所有参数（包含:_JiaSrc）按参数名的 ASCII 码从小到大排序，末尾添加当天的日期 YYYY-MM-dd
+签名说明：加入请求参数是 bc=1&ca=2&ba=3&ac=4 ，那加密方式则是请求参数经过 ASCII 码有小到大排序后 （）。
 
 ### 请求网关地址
 <img src="https://raw.githubusercontent.com/jiashaokun/doc/master/txt/gw1.jpg"></img>
