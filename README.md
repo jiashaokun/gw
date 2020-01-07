@@ -39,7 +39,7 @@ GW（网关）包含请求转发，请求超时设置，请求限制，该项目
 >* 签名加密方式：MD5 32位小写
 >* 请求有效期：当天
 
-签名说明：加入请求参数是 bc=1&ca=2&ba=3&ac=4 ，那加密方式则是请求参数经过 ASCII 码有小到大排序后 （）。
+签名说明：加入请求参数是 bc=1&ca=2&ba=3&ac=4 ，那加密方式则是请求参数经过 ASCII 码有小到大排序后(参数排序 + 签名串 + 时间 到天) ab=3&ac=1&cd=2&sn=asf&src=1d4ac86d2-dc91-4675-942e-3aaa8bd4b5c12020-01-07 并对其进行MD5后为 a1f39e2e203a389a82974d1a6862e411 。
 
 ### 请求网关地址
 <img src="https://raw.githubusercontent.com/jiashaokun/doc/master/txt/gw1.jpg"></img>
