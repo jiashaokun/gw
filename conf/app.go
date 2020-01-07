@@ -1,7 +1,7 @@
 package conf
 
 // 是否开鉴权
-const AccessToken = 1
+const AccessToken = 0
 
 //app 主动断开时间
 const RequestTimeOut = 30

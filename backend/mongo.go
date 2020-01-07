@@ -28,11 +28,11 @@ type MongoList []MongoInfo
 
 type MongoAuth struct {
 	Id         string `bson:"id" json:"id"`
-	Src        string `bson:"src" json:"src"`
-	Key        string `bson:"key" json:"key"`
-	Content    string `bson:"content" json:"content" form:"content"`
-	UserName   string `bson:"user_name" json:"user_name"`
-	UserEmail  string `bson:"user_email" json:"user_email"`
+	Src        string `bson:"src" json:"src" form:"src" binding:"required"`
+	Key        string `bson:"key" json:"key" form:"key"`
+	Content    string `bson:"content" json:"content" form:"content" binding:"required"`
+	UserName   string `bson:"user_name" json:"user_name" form:"user_name" binding:"required"`
+	UserEmail  string `bson:"user_email" json:"user_email" form:"user_email" binding:"required"`
 	CreateTime string `bson:"create_time" json:"create_time"`
 	UpdateTime string `bson:"update_time" json:"update_time"`
 }

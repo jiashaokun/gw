@@ -7,7 +7,6 @@ import (
 
 // 获取key
 func CacheKey(k string) string {
-	return k
 	ctx := md5.New()
 	ctx.Write([]byte(k))
 
