@@ -2,6 +2,7 @@ package backend
 
 type MongoInfo struct {
 	Id         string `bson:"id" json:"id"`
+	GroupId    string `bson:"group_id" json:"group_id" form:"group_id" binding:"required"`
 	Name       string `bson:"name" json:"name" form:"name" binding:"required"`
 	Path       string `bson:"path" json:"path" form:"path" binding:"required"`
 	To         string `bson:"to" json:"to" form:"to" binding:"required"`
