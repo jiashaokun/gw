@@ -1,6 +1,6 @@
 package conf
 
-// 是否开鉴权
+// 是否开鉴权 建议内网访问，不建议开启，开启后，所有访问接口（admin接口同样适用）都会进行鉴权
 const AccessToken = 0
 
 //app 主动断开时间

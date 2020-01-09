@@ -12,11 +12,12 @@ import (
 func Route() *gin.Engine {
 	r := gin.Default()
 
+	//统一鉴权
+	r.Use(middle.Auth())
+
 	//后台接口调用路由
 	admin.Route(r)
 
-	//统一鉴权
-	r.Use(middle.Auth())
 	//外部调用路由
 	api.Route(r)
 

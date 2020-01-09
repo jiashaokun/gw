@@ -40,3 +40,26 @@ func AddGroup(c *gin.Context) {
 
 	response.Response(c, 200, nil)
 }
+
+//获取路由组列表
+func ListGroup(c *gin.Context) {
+	var g,l backend.MongoGroup
+	var list []backend.MongoGroup
+
+	gl, err := library.FindAllGroup("group", bson.M{}, &g)
+	if err != nil {
+		response.Response(c, 500, nil)
+		return
+	}
+	for _,v := range gl {
+		l.Id = v.Id
+		l.Name = v.Name
+		l.Group = v.Group
+		l.UpdateTime = v.UpdateTime
+		l.CreateTime = v.CreateTime
+
+		list = append(list, l)
+	}
+
+	response.Response(c, 200, list)
+}

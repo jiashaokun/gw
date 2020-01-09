@@ -25,8 +25,6 @@ type MongoGroup struct {
 	UpdateTime string `bson:"update_time" json:"update_time"`
 }
 
-type MongoList []MongoInfo
-
 type MongoAuth struct {
 	Id         string `bson:"id" json:"id"`
 	Src        string `bson:"src" json:"src" form:"src" binding:"required"`
