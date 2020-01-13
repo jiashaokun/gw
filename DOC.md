@@ -26,3 +26,13 @@ group | string | 是 | 分组路由信息 | /user/ (字符串首尾有 '/' )
 
 ### group 分组列表接口
 #### http://127.0.0.1:1323/req/list/group
+
+### wg 请求列表接口
+#### http://127.0.0.1:1323/req/list/wg
+
+字段名 | 类型 | 是否必选 | 备注 | 试例
+---|---|---|---|---
+group_id | string | 否 | 分组路由ID | f2509627-08e5-4575-818c-f8b27b26c631
+name|string|否|通过name搜索|1测试
+id|string|否|通过id所搜|f2509627-08e5-4575-818c-f8b27b26c631
+

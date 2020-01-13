@@ -43,7 +43,7 @@ func AddGroup(c *gin.Context) {
 
 //获取路由组列表
 func ListGroup(c *gin.Context) {
-	var g,l backend.MongoGroup
+	var g, l backend.MongoGroup
 	var list []backend.MongoGroup
 
 	gl, err := library.FindAllGroup("group", bson.M{}, &g)
@@ -51,7 +51,7 @@ func ListGroup(c *gin.Context) {
 		response.Response(c, 500, nil)
 		return
 	}
-	for _,v := range gl {
+	for _, v := range gl {
 		l.Id = v.Id
 		l.Name = v.Name
 		l.Group = v.Group

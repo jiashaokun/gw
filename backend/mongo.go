@@ -35,3 +35,9 @@ type MongoAuth struct {
 	CreateTime string `bson:"create_time" json:"create_time"`
 	UpdateTime string `bson:"update_time" json:"update_time"`
 }
+
+type MongoWgListApi struct {
+	Id         string `bson:"id" json:"id" form:"id"`
+	GroupId    string `bson:"group_id" json:"group_id" form:"group_id"`
+	Name       string `bson:"name" json:"name" form:"name"`
+}

@@ -79,6 +79,32 @@ func FindAllGroup(tb string, w bson.M, m *backend.MongoGroup) ([]*backend.MongoG
 	return info, nil
 }
 
+//条件查询wg
+func FindAllWg(tb string, w bson.M, m *backend.MongoInfo) ([]*backend.MongoInfo, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	cur, err := cli.Collection(tb).Find(ctx, w)
+	if err != nil {
+		return nil, err
+	}
+	defer cur.Close(ctx)
+
+	if err := cur.Err(); err != nil {
+		return nil, err
+	}
+
+	var info []*backend.MongoInfo
+	for cur.Next(ctx) {
+		if err := cur.Decode(m); err != nil {
+			return nil, err
+		}
+		info = append(info, m)
+	}
+
+	return info, nil
+}
+
 //查询全部数据
 func FindAll(tb string) ([]backend.MongoInfo, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
