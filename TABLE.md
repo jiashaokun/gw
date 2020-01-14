@@ -29,7 +29,7 @@ dns|int|是否需要dns | 0：不需要；1：需要 (若需要，则轮训访�
 flow|int|单机请求流量限制|0:代表不限流,该请求轮训字段to中的地址
 cache_ime|int|数据缓存时间,单位：秒|0 不开启缓存
 timeout|int|请求超时时间|单位：秒
-decay|int|请求衰减（容错）|0：不开启,1：开启 若开启超时或500时则逐渐递减请求，请求结果将是最后一次访问的正确结果
+decay|int|请求衰减（容错）|0：不开启,1：开启 若开启此状态那超时，则逐渐递减请求，请求结果将是最后一次访问的正确结果
 decay_time|int|请求衰减间隔时间|单位：秒，decay=1时生效
 create_time|string|创建时间|Y-m-d H:i:s
 update_time|string|更新时间|Y-m-d H:i:s
