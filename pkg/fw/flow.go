@@ -21,7 +21,7 @@ func (f *Flow) Check() error {
 		return nil
 	}
 
-	key := util.CacheKey(fmt.Sprintf("flow_%s", f.Path))
+	key := util.CacheKey(fmt.Sprintf("flow_%s_%s", f.Path, util.GetDay()))
 
 	//cache 中 path 的请求数 +1
 	library.Incr(key)

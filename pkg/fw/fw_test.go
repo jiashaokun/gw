@@ -2,9 +2,10 @@ package fw
 
 import (
 	"fmt"
+	"testing"
+
 	"gw/library"
 	"gw/util"
-	"testing"
 )
 
 func TestFlow_Check(t *testing.T) {
@@ -14,7 +15,7 @@ func TestFlow_Check(t *testing.T) {
 		Num:  10,
 	}
 
-	key := util.CacheKey(fmt.Sprintf("flow_%s", path))
+	key := util.CacheKey(fmt.Sprintf("flow_%s", path, util.GetDay()))
 	n := library.GetCache(key)
 
 	err := fw.Check()

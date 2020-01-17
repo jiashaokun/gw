@@ -49,6 +49,9 @@ func GetCache(key string) string {
 //Incr
 func Incr(key string) {
 	rds.Incr(key)
+	//过期的key保存一天时间
+	expTime := 86400 * time.Second
+	rds.Expire(key, expTime)
 }
 
 //HSet
