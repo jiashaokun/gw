@@ -30,13 +30,13 @@
 4. 开始访问，比如在 group 中添加的是 /user/ 在 wg 中添加的是 /user/info 那么访问的地址就是 http://127.0.0.1:1323/user/info?id=1...
 
 <h3 id='dtly'>动态路由</h3>
-gw 提供动态路由功能，该功能避免增加接口后反复构建项目上线的操作，具体描述如下。
+>* gw 提供动态路由功能，该功能避免增加接口后反复构建项目上线的操作，具体描述如下。
 1. Mongo 中 group 表设置的是分组用途，比如拿瓜子二手车来讲：group 字段为 /car/ ，name（group字段的中文描述）字段为 车辆信息分组。
 2. 举例要访问瓜子 car_id 为 999 的车辆信息，Mongo 中表 wg 中的字段 to 值应该为：http://api.guazi.xin.com。
 3. 依据第 1 点举例，在 Mongo 表 wg 中添加的所有该分组路由都可以直接转发，但path规则为(举例)：/car/info?car_id=999...(参数列表)。
 
 <h3 id='qqzf'>请求转发</h3>
-gw 目前只提供 GET 和 POST 两种转发，后续会增加 RPC 调用。
+>* gw 目前只提供 GET 和 POST 两种转发，后续会增加 RPC 调用。
 1. Mongo 中 wg 表中字段 method 为请求方式，目前只支持 GET 和 POST。
 2. 请求转发不影响前端调用，所有在 Mongo 表 group 中添加的分组，均提供多种调用方式比如：GET/POST/PUT/PATCH 等。
 3. wg 表中的 method 的值为最终发送请求的方式。
