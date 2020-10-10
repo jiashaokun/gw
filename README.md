@@ -19,7 +19,7 @@
 
 # 如何使用
 >* DOC.md 中提供了目前写入数据的接口文档
->* TABLE.md 中提供了MongoDB表设计文档
+>* [TABLE.md](https://github.com/jiashaokun/gw/blob/master/TABLE.md) 中提供了MongoDB表设计文档
 
 1. 启动项目
  ```shell
