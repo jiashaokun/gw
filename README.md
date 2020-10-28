@@ -48,7 +48,7 @@
 <h3 id='dns'>DNS</h3>
 
 1. 在多个IP配置时，gw 提供相应的 DNS 服务，通过 Mongo 中表 wg 中的字段 dns 0/1 来设置 关闭/开启。
-2. 多IP配置方式为 Mongo 中标 wg 中字段 to 使用英文逗号分隔（末尾不加）举例：http://api1.guazi.com,http://127.0.0.1:1,http://127.0.0.1:2 。
+2. 多IP配置方式为 Mongo 中表 wg 中字段 to 使用英文逗号分隔（末尾不加）举例：http://api1.guazi.com,http://127.0.0.1:1,http://127.0.0.1:2 。
 3. 在字段 dns 为 1 的前提下，对请求提供轮训访问模式。
 
 <h3 id='xl'>限流</h3>
@@ -58,12 +58,12 @@
 
 <h3 id='hc'>数据缓存</h3>
 
-1. 在 Mongo 中标 wg 中字段 cache_ime 大于 0 时，则代表缓存开启，单位: 秒。
+1. 在 Mongo 中表 wg 中字段 cache_ime 大于 0 时，则代表缓存开启，单位: 秒。
 2. 缓存模式是基于 Redis 的，所以请确保 conf 包下的 Cache 配置正确。
 
 <h3 id='rc'>容错</h3>
 
-1. 在 Mongo 中标 wg 中 decay 字段为 0/1 代表容错的 关闭/开启。
+1. 在 Mongo 中表 wg 中 decay 字段为 0/1 代表容错的 关闭/开启。
 2. 当 decay 为 1 时，若请求遇到错误（http 500 或者 超时）时，将返回上一次请求的数据。
 3. Mongo 中 wg 表中的字段 decay_time 为再次请求时间，当 decay 为 1 并且请求遇到错误时，间隔 decay_time 秒后，请求再次渗透，decay_time 秒内一直返回上一次的正确请求。
 
